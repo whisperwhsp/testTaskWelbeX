@@ -1,0 +1,8 @@
+.thSort span {
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.thSort span:hover {
+  opacity: 0.8;
+}

@@ -8,10 +8,10 @@ const FilterPanel = ({ ...props }) => (
     <div className="col-6 col-xl">
       <div className="mb-3">
         <Select
-          label="Колонка для фильтрации"
+          label="Выбор колонки"
           name="columnFilter"
           value={props.column}
-          onChange={props.handleSetColumn}
+          onChange={props.handleSetColumnFilter}
           options={[
             { label: 'Нажмите чтобы выбрать', value: '' },
             { label: 'Название', value: 'Название' },
@@ -24,7 +24,7 @@ const FilterPanel = ({ ...props }) => (
     <div className="col-6 col-xl">
       <div className="mb-3">
         <Select
-          label="Колонка для фильтрации"
+          label="Выбор условия"
           name="typeFilter"
           value={props.typeFilter}
           onChange={props.handleSetTypeFilter}
@@ -43,7 +43,7 @@ const FilterPanel = ({ ...props }) => (
       <div className="mb-3">
         <InputText
           type="text"
-          label="Значения для фильтра"
+          label="Поиск по фильтру"
           name="valueFilter"
           value={props.valueFilter}
           onChange={props.handleSetValueFilter}
@@ -60,7 +60,7 @@ FilterPanel.propTypes = {
   column: PropTypes.string.isRequired,
   typeFilter: PropTypes.string.isRequired,
   valueFilter: PropTypes.string.isRequired,
-  handleSetColumn: PropTypes.func.isRequired,
+  handleSetColumnFilter: PropTypes.func.isRequired,
   handleSetTypeFilter: PropTypes.func.isRequired,
   handleSetValueFilter: PropTypes.func.isRequired,
   resetFilter: PropTypes.func.isRequired,

@@ -2,27 +2,27 @@
   "rows": [
     {
       "date": 1655294288935,
-      "title": "Название 1",
+      "title": "В",
       "quantity": 1,
-      "distance": 10
-    },
-    {
-      "date": 1655294294398,
-      "title": "Название 2",
-      "quantity": 2,
       "distance": 15
     },
     {
+      "date": 1655294294398,
+      "title": "Б",
+      "quantity": 2,
+      "distance": 10
+    },
+    {
       "date": 1655294310664,
-      "title": "Название 3",
+      "title": "А",
       "quantity": 3,
-      "distance": 20
+      "distance": 5
     },
     {
       "date": 1655294316400,
-      "title": "Название 4",
+      "title": "Г",
       "quantity": 3,
-      "distance": 25
+      "distance": 8
     }
   ]
 }

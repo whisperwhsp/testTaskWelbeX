@@ -2,8 +2,8 @@ import axios from 'axios';
 import BASE_URL from './config';
 
 class HttpTable {
-  static getData = async () => {
-    await axios.get(`${BASE_URL}/api/gettabledata`);
+  static getSomeRows = async (quantity) => {
+    await axios.get(`${BASE_URL}/api/table/`, { quantity });
   };
 }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import FilterPanel from './components/FilterPanel';
 import Table from './components/Table';
 import mock from './components/Table/mock.json';
+import HttpTable from './http/HttpTable';
 
 const App = () => {
   const [columnFilter, setColumnFilter] = React.useState('');
@@ -18,6 +19,15 @@ const App = () => {
     setTypeFilter('');
     setValueFilter('');
   };
+
+  const getData = async (quantity) => {
+    const response = await HttpTable.getSomeRows(quantity);
+    console.log(response.data);
+  };
+
+  React.useEffect(() => {
+    getData(1);
+  }, []);
 
   return (
     <div className="App">

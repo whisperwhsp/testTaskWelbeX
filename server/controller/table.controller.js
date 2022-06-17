@@ -1,8 +1,8 @@
+/* eslint-disable class-methods-use-this */
 const db = require('../db');
 
 class TableController {
-  static async getSomeData(req, res) {
-    const quantityRows = req.body;
+  async getSomeData(req, res) {
     const rows = await db.query('SELECT * FROM testtask');
     res.json(rows.rows);
   }

@@ -3,6 +3,6 @@ const tableController = require('../controller/table.controller');
 
 const router = new Router();
 
-router.get('/table/:rows', () => tableController.getSomeData);
+router.get('/table', tableController.getSomeData);
 
 module.exports = router;

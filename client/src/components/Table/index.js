@@ -4,11 +4,10 @@ import cl from './Table.module.css';
 
 const Table = ({ ...props }) => {
   const [sortColumn, setSortColumn] = React.useState('');
-  const [data, setData] = React.useState(props.data);
 
   const sortData = (sort) => {
     setSortColumn(sort);
-    setData([...data].sort((a, b) => {
+    props.setData([...props.data].sort((a, b) => {
       if (typeof a[sort] === 'string') return a[sort].localeCompare(b[sort]);
       return a[sort] - b[sort];
     }));
@@ -31,14 +30,19 @@ const Table = ({ ...props }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((row) => (
-          <tr key={row.date}>
-            <td>{row.date}</td>
-            <td>{row.title}</td>
-            <td>{row.quantity}</td>
-            <td>{row.distance}</td>
-          </tr>
-        ))}
+        {props.data.map((row) => {
+          const formattedDate = new Date(row.dateutc);
+          const stringDate = `${formattedDate.getDate()}.${formattedDate.getMonth()}.${formattedDate.getFullYear()}`;
+
+          return (
+            <tr key={row.dateutc}>
+              <td>{stringDate}</td>
+              <td>{row.title}</td>
+              <td>{row.quantity}</td>
+              <td>{row.distance}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
@@ -46,11 +50,12 @@ const Table = ({ ...props }) => {
 
 Table.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
-    date: PropTypes.number.isRequired,
+    dateutc: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
     distance: PropTypes.number.isRequired,
   })).isRequired,
+  setData: PropTypes.func.isRequired,
 };
 
 export default Table;

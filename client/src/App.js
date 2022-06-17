@@ -1,32 +1,33 @@
 import React from 'react';
 import FilterPanel from './components/FilterPanel';
 import Table from './components/Table';
-import mock from './components/Table/mock.json';
 import HttpTable from './http/HttpTable';
 
 const App = () => {
-  const [columnFilter, setColumnFilter] = React.useState('');
-  const [typeFilter, setTypeFilter] = React.useState('');
-  const [valueFilter, setValueFilter] = React.useState('');
+  const [data, setData] = React.useState();
+  const [filter, setFilter] = React.useState({
+    column: '',
+    type: '',
+    query: '',
+  });
 
-  const data = mock.rows;
-
-  const handleSetColumnFilter = (event) => setColumnFilter(event.target.value);
-  const handleSetTypeFilter = (event) => setTypeFilter(event.target.value);
-  const handleSetValueFilter = (event) => setValueFilter(event.target.value);
-  const resetFilter = () => {
-    setColumnFilter('');
-    setTypeFilter('');
-    setValueFilter('');
+  const getData = async () => {
+    const response = await HttpTable.getData();
+    setData(response);
   };
 
-  const getData = async (quantity) => {
-    const response = await HttpTable.getSomeRows(quantity);
-    console.log(response.data);
-  };
+  const filteredData = React.useMemo(() => {
+    if (!filter.query) return data;
+    return data.filter((row) => {
+      if (typeof row[filter.column] === 'number') {
+        return row[filter.column].toString().includes(filter.query);
+      }
+      return row[filter.column].toLowerCase().includes(filter.query);
+    });
+  }, [filter.query, filter.type, data]);
 
   React.useEffect(() => {
-    getData(1);
+    getData();
   }, []);
 
   return (
@@ -34,18 +35,19 @@ const App = () => {
       <div className="my-3 container-fluid">
         <div className="mb-3 row align-items-center">
           <FilterPanel
-            column={columnFilter}
-            typeFilter={typeFilter}
-            valueFilter={valueFilter}
-            handleSetColumnFilter={handleSetColumnFilter}
-            handleSetTypeFilter={handleSetTypeFilter}
-            handleSetValueFilter={handleSetValueFilter}
-            resetFilter={resetFilter}
+            filter={filter}
+            setFilter={setFilter}
           />
         </div>
-        <Table
-          data={data}
-        />
+        {!filteredData ? (
+          <p>загрузка данных...</p>
+        ) : (
+          <Table
+            data={filteredData}
+            setData={setData}
+          />
+        )}
+
       </div>
     </div>
   );

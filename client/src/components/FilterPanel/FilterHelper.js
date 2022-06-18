@@ -17,7 +17,6 @@ class FilterHelper {
     if (type === 'equals') {
       return array.filter((el) => {
         if (typeof el[column] === 'number') return el[column] === Number(query);
-        console.log(el[column].toLowerCase().includes(query));
         return el[column].toLowerCase().includes(query);
       });
     }

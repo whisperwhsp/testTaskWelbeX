@@ -20,7 +20,6 @@ const FilterPanel = ({ filter, setFilter }) => {
             value={filter.column}
             onChange={handleChangeFilter}
             options={[
-              { label: 'Нажмите чтобы выбрать', value: '' },
               { label: 'Название', value: 'title' },
               { label: 'Количество', value: 'quantity' },
               { label: 'Расстояние', value: 'distance' },
@@ -36,11 +35,10 @@ const FilterPanel = ({ filter, setFilter }) => {
             value={filter.type}
             onChange={handleChangeFilter}
             options={[
-              { label: 'Нажмите чтобы выбрать', value: '' },
-              { label: 'Равно', value: 'Равно' },
-              { label: 'Содержит', value: 'Содержит' },
-              { label: 'Больше', value: 'Больше' },
-              { label: 'Меньше', value: 'Меньше' },
+              { label: 'Содержит', value: 'include' },
+              { label: 'Равно', value: 'equals' },
+              { label: 'Больше', value: 'over', disabled: filter.column === 'title' },
+              { label: 'Меньше', value: 'less', disabled: filter.column === 'title' },
 
             ]}
           />

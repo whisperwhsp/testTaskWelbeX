@@ -12,7 +12,7 @@ const Select = ({ ...props }) => (
       onChange={props.onChange}
     >
       {props.options.map((option) => (
-        <option value={option.value} key={option.value} disabled={!option.value}>
+        <option value={option.value} key={option.value} disabled={option.disabled}>
           {option.label}
         </option>
       ))}
@@ -22,6 +22,7 @@ const Select = ({ ...props }) => (
 
 Select.defaultProps = {
   label: '',
+  options: [],
 };
 
 Select.propTypes = {
@@ -30,9 +31,10 @@ Select.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  })).isRequired,
+    label: PropTypes.string,
+    value: PropTypes.string,
+    disabled: PropTypes.bool,
+  })),
 };
 
 export default Select;
